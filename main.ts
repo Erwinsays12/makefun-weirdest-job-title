@@ -114,9 +114,15 @@ function score(candidate: Candidate): number {
 }
 
 function pickBest(candidates: Candidate[]): Candidate {
+  // The gate caps the file at 60 characters, so a candidate longer than
+  // that can never win: drop it here rather than failing at write time.
+  const eligible = candidates.filter((c) => c.title.length <= 60);
+  if (eligible.length === 0) {
+    throw new Error("no candidate fits the 60-character gate");
+  }
   // Deterministic: highest score wins; ties break to the shorter title,
   // then to the alphabetically first, so the choice never depends on order.
-  return [...candidates].sort((a, b) => {
+  return [...eligible].sort((a, b) => {
     const byScore = score(b) - score(a);
     if (byScore !== 0) return byScore;
     const byLength = a.title.length - b.title.length;
