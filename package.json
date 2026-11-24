@@ -1,0 +1,1 @@
+{"description":"Writes one weird job title (60 characters at most) to /output/entry.txt for the Weirdest Job Title: Blind Judge Showdown bounty on make.fun.","license":"MIT","main":"main.ts","name":"makefun-weirdest-job-title","private":true,"scripts":{"start":"node main.ts"},"type":"module","version":"1.0.0"}
